@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="Samples/TinyOutbox.Sample.Api/TinyOutbox.Sample.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="TinyOutbox.IntegrationTests/TinyOutbox.IntegrationTests.csproj" />
+  </Folder>
+  <Project Path="TinyOutbox.Core/TinyOutbox.Core.csproj" />
+  <Project Path="TinyOutbox.Hosting/TinyOutbox.Hosting.csproj" />
+  <Project Path="TinyOutbox.Storage.PostgreSql/TinyOutbox.Storage.PostgreSql.csproj" />
+  <Project Path="TinyOutbox.Transport.RabbitMQ/TinyOutbox.Transport.RabbitMQ.csproj" />
+</Solution>

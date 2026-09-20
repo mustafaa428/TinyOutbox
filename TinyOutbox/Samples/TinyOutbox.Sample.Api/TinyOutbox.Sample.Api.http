@@ -1,0 +1,6 @@
+@TinyOutbox.Sample.Api_HostAddress = http://localhost:5201
+
+GET {{TinyOutbox.Sample.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
