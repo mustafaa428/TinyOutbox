@@ -11,6 +11,10 @@ jobs:
     name: Build, Run Tests with Testcontainers
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./TinyOutbox
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
