@@ -1,4 +1,4 @@
-﻿namespace TinyOutbox.Core;
+﻿namespace TinyOutbox.Core.Services.Abstract;
 
 public interface IMessagePublisher
 {

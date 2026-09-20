@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace TinyOutbox.Core;
+namespace TinyOutbox.Core.Services.Abstract;
 
 public class TinyOutboxService : ITinyOutbox
 {

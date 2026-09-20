@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using Dapper;
 using Npgsql;
-using TinyOutbox.Core;
+using TinyOutbox.Core.Services.Abstract;
 
 namespace TinyOutbox.Storage.PostgreSql;
 

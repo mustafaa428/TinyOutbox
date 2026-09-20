@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using TinyOutbox.Core;
+using TinyOutbox.Core.Services.Abstract;
 
 namespace TinyOutbox.Hosting;
 

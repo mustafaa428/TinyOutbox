@@ -11,6 +11,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json.Nodes;
+using TinyOutbox.Core.Services.Abstract;
 using Xunit;
 
 namespace TinyOutbox.IntegrationTests;

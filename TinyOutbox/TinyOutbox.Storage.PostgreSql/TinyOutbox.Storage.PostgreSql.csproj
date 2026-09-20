@@ -1,19 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.86" />
-    <PackageReference Include="Npgsql" Version="10.0.3" />
-  </ItemGroup>
+		<!-- NuGet Paketleme Ayarları -->
+		<IsPackable>true</IsPackable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TinyOutbox.Core\TinyOutbox.Core.csproj" />
-    <ProjectReference Include="..\TinyOutbox.Hosting\TinyOutbox.Hosting.csproj" />
-  </ItemGroup>
+		<!-- NuGet Metadata -->
+		<PackageId>TinyOutbox.Storage.PostgreSql</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Mustafa</Authors>
+		<Description>PostgreSQL storage provider for TinyOutbox with SKIP LOCKED concurrency safety.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/mustafaa428/TinyOutbox</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mustafaa428/TinyOutbox</RepositoryUrl>
+		<PackageTags>outbox;postgresql;npgsql;dapper;skip-locked</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.1.86" />
+		<PackageReference Include="Npgsql" Version="10.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TinyOutbox.Core\TinyOutbox.Core.csproj" />
+		<ProjectReference Include="..\TinyOutbox.Hosting\TinyOutbox.Hosting.csproj" />
+	</ItemGroup>
 
 </Project>

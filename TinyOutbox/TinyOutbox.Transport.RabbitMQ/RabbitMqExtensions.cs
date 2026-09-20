@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TinyOutbox.Core;
+using TinyOutbox.Core.Services.Abstract;
 using TinyOutbox.Hosting;
 
 namespace TinyOutbox.Transport.RabbitMQ;

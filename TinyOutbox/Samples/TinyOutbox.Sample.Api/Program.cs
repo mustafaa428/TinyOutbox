@@ -1,7 +1,7 @@
 using TinyOutbox.Hosting;
 using TinyOutbox.Storage.PostgreSql;
 using TinyOutbox.Transport.RabbitMQ;
-using TinyOutbox.Core;
+using TinyOutbox.Core.Services.Abstract;
 
 var builder = WebApplication.CreateBuilder(args);
 

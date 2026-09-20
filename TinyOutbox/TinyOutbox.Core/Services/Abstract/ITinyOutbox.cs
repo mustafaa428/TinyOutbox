@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace TinyOutbox.Core;
+namespace TinyOutbox.Core.Services.Abstract;
 
 public interface ITinyOutbox
 {
