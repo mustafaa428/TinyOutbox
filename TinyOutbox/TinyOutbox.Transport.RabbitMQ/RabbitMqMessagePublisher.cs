@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using RabbitMQ.Client;
+using TinyOutbox.Core;
 using TinyOutbox.Core.Services.Abstract;
 
 namespace TinyOutbox.Transport.RabbitMQ;

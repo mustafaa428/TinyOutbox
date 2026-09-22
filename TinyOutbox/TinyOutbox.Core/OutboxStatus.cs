@@ -1,4 +1,4 @@
-﻿namespace TinyOutbox.Core.Services.Abstract;
+﻿namespace TinyOutbox.Core;
 
 public enum OutboxStatus : byte
 {

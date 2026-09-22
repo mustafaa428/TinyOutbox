@@ -1,62 +1,30 @@
-﻿using System.Data.Common;
-using Dapper;
+﻿using Dapper;
 using Npgsql;
-using TinyOutbox.Core.Services.Abstract;
+using TinyOutbox.Core;
 
 namespace TinyOutbox.Storage.PostgreSql;
 
 public class PostgreSqlOutboxStorage : IOutboxStorage
 {
-    private readonly PostgreSqlOutboxOptions _options;
+    private readonly string _connectionString;
+    private readonly string _tableName;
+
+    public PostgreSqlOutboxStorage(string connectionString, string tableName = "tiny_outbox_messages")
+    {
+        _connectionString = connectionString;
+        _tableName = tableName;
+    }
 
     public PostgreSqlOutboxStorage(PostgreSqlOutboxOptions options)
+        : this(options.ConnectionString, options.TableName)
     {
-        _options = options;
-        if (_options.AutoMigrate)
-        {
-            EnsureTablesCreated();
-        }
     }
 
-    private void EnsureTablesCreated()
-    {
-        using var connection = new NpgsqlConnection(_options.ConnectionString);
-        connection.Open();
-
-        var sql = $@"
-            -- Outbox Tablosu
-            CREATE TABLE IF NOT EXISTS {_options.TableName} (
-                id UUID PRIMARY KEY,
-                event_type VARCHAR(500) NOT NULL,
-                payload JSONB NOT NULL,
-                created_at_utc TIMESTAMPTZ NOT NULL,
-                scheduled_at_utc TIMESTAMPTZ NOT NULL,
-                processed_at_utc TIMESTAMPTZ NULL,
-                retry_count INT NOT NULL DEFAULT 0,
-                last_error TEXT NULL,
-                status SMALLINT NOT NULL DEFAULT 0
-            );
-
-            CREATE INDEX IF NOT EXISTS idx_{_options.TableName}_fetch 
-            ON {_options.TableName} (scheduled_at_utc, status) 
-            WHERE status = 0;
-
-            -- Inbox Tablosu (Idempotency için)
-            CREATE TABLE IF NOT EXISTS {_options.InboxTableName} (
-                message_id UUID PRIMARY KEY,
-                event_type VARCHAR(500) NOT NULL,
-                received_at_utc TIMESTAMPTZ NOT NULL DEFAULT NOW()
-            );";
-
-        connection.Execute(sql);
-    }
-
-    public async Task EnqueueAsync(OutboxMessage message, object? dbTransaction = null, CancellationToken ct = default)
+    public async Task EnqueueAsync(OutboxMessage message, object? dbTransaction = null, CancellationToken cancellationToken = default)
     {
         var sql = $@"
-            INSERT INTO {_options.TableName} 
-            (id, event_type, payload, created_at_utc, scheduled_at_utc, retry_count, status)
-            VALUES (@Id, @EventType, @Payload::jsonb, @CreatedAtUtc, @ScheduledAtUtc, @RetryCount, @Status);";
+            INSERT INTO {_tableName} (id, event_type, payload, created_at_utc, scheduled_at_utc, status, retry_count)
+            VALUES (@Id, @EventType, @Payload, @CreatedAtUtc, @ScheduledAtUtc, @Status, @RetryCount);";
 
         var parameters = new
         {
@@ -65,66 +33,119 @@ public class PostgreSqlOutboxStorage : IOutboxStorage
             message.Payload,
             message.CreatedAtUtc,
             message.ScheduledAtUtc,
-            message.RetryCount,
-            Status = (short)message.Status
+            Status = (short)message.Status,
+            message.RetryCount
         };
 
-        if (dbTransaction is DbTransaction tx)
+        if (dbTransaction is NpgsqlTransaction tx)
         {
-            await tx.Connection!.ExecuteAsync(new CommandDefinition(sql, parameters, transaction: tx, cancellationToken: ct));
+            await tx.Connection!.ExecuteAsync(new CommandDefinition(
+                sql,
+                parameters,
+                transaction: tx,
+                cancellationToken: cancellationToken));
+            return;
         }
-        else
-        {
-            await using var conn = new NpgsqlConnection(_options.ConnectionString);
-            await conn.ExecuteAsync(new CommandDefinition(sql, parameters, cancellationToken: ct));
-        }
+
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        await connection.ExecuteAsync(new CommandDefinition(
+            sql,
+            parameters,
+            cancellationToken: cancellationToken));
     }
 
-    public async Task<IReadOnlyList<OutboxMessage>> FetchPendingAsync(int batchSize, CancellationToken ct = default)
+    public async Task<IReadOnlyList<OutboxMessage>> FetchPendingMessagesAsync(int batchSize, CancellationToken cancellationToken = default)
     {
         var sql = $@"
-            WITH picked AS (
-                SELECT id 
-                FROM {_options.TableName}
-                WHERE status = 0 AND scheduled_at_utc <= NOW()
-                ORDER BY created_at_utc ASC
-                LIMIT @BatchSize
-                FOR UPDATE SKIP LOCKED
-            )
-            UPDATE {_options.TableName} t
-            SET status = 1 -- Processing
-            FROM picked p
-            WHERE t.id = p.id
-            RETURNING t.id, t.event_type AS EventType, t.payload, t.created_at_utc AS CreatedAtUtc, 
-                      t.scheduled_at_utc AS ScheduledAtUtc, t.retry_count AS RetryCount, t.status AS Status;";
+            SELECT 
+                id AS Id,
+                event_type AS EventType,
+                payload AS Payload,
+                created_at_utc AS CreatedAtUtc,
+                scheduled_at_utc AS ScheduledAtUtc,
+                processed_at_utc AS ProcessedAtUtc,
+                retry_count AS RetryCount,
+                last_error AS LastError,
+                status AS Status
+            FROM {_tableName}
+            WHERE status = {(short)OutboxStatus.Pending} AND scheduled_at_utc <= @Now
+            ORDER BY scheduled_at_utc ASC
+            LIMIT @BatchSize
+            FOR UPDATE SKIP LOCKED;";
 
-        await using var conn = new NpgsqlConnection(_options.ConnectionString);
-        var result = await conn.QueryAsync<OutboxMessage>(new CommandDefinition(sql, new { BatchSize = batchSize }, cancellationToken: ct));
-        return result.ToList();
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        var messages = await connection.QueryAsync<OutboxMessage>(new CommandDefinition(
+            sql,
+            new { Now = DateTime.UtcNow, BatchSize = batchSize },
+            cancellationToken: cancellationToken));
+
+        return messages.ToList();
     }
 
-    public async Task MarkAsCompletedAsync(Guid messageId, CancellationToken ct = default)
+    public async Task MarkAsProcessedAsync(Guid messageId, CancellationToken cancellationToken = default)
     {
         var sql = $@"
-            UPDATE {_options.TableName}
-            SET status = 2, processed_at_utc = NOW()
+            UPDATE {_tableName}
+            SET status = {(short)OutboxStatus.Completed},
+                processed_at_utc = @ProcessedAtUtc,
+                last_error = NULL
             WHERE id = @Id;";
 
-        await using var conn = new NpgsqlConnection(_options.ConnectionString);
-        await conn.ExecuteAsync(new CommandDefinition(sql, new { Id = messageId }, cancellationToken: ct));
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        await connection.ExecuteAsync(new CommandDefinition(
+            sql,
+            new { Id = messageId, ProcessedAtUtc = DateTime.UtcNow },
+            cancellationToken: cancellationToken));
     }
 
-    public async Task MarkAsFailedAsync(Guid messageId, string errorMessage, int maxRetries, CancellationToken ct = default)
+    public async Task MarkAsFailedAsync(Guid messageId, string error, DateTime nextRetryUtc, CancellationToken cancellationToken = default)
     {
         var sql = $@"
-            UPDATE {_options.TableName}
+            UPDATE {_tableName}
             SET retry_count = retry_count + 1,
                 last_error = @Error,
-                status = CASE WHEN retry_count + 1 >= @MaxRetries THEN 3 ELSE 0 END,
-                scheduled_at_utc = NOW() + (INTERVAL '2 seconds' * POWER(2, retry_count))
+                scheduled_at_utc = @NextRetryUtc,
+                status = {(short)OutboxStatus.Pending}
             WHERE id = @Id;";
 
-        await using var conn = new NpgsqlConnection(_options.ConnectionString);
-        await conn.ExecuteAsync(new CommandDefinition(sql, new { Id = messageId, Error = errorMessage, MaxRetries = maxRetries }, cancellationToken: ct));
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        await connection.ExecuteAsync(new CommandDefinition(
+            sql,
+            new { Id = messageId, Error = error, NextRetryUtc = nextRetryUtc },
+            cancellationToken: cancellationToken));
+    }
+
+    public async Task<int> CleanupOldMessagesAsync(DateTime processedThresholdUtc, DateTime failedThresholdUtc, int batchSize, CancellationToken cancellationToken = default)
+    {
+        var sql = $@"
+            WITH to_delete AS (
+                SELECT id FROM {_tableName}
+                WHERE (status = {(short)OutboxStatus.Completed} AND processed_at_utc < @ProcessedThreshold)
+                   OR (status = {(short)OutboxStatus.Failed} AND created_at_utc < @FailedThreshold)
+                LIMIT @BatchSize
+            )
+            DELETE FROM {_tableName}
+            WHERE id IN (SELECT id FROM to_delete);";
+
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        return await connection.ExecuteAsync(new CommandDefinition(
+            sql,
+            new
+            {
+                ProcessedThreshold = processedThresholdUtc,
+                FailedThreshold = failedThresholdUtc,
+                BatchSize = batchSize
+            },
+            cancellationToken: cancellationToken));
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TinyOutbox.Core;
 using TinyOutbox.Core.Services.Abstract;
+
 
 namespace TinyOutbox.Hosting;
 
@@ -31,7 +33,7 @@ public class OutboxBackgroundWorker : BackgroundService
         {
             try
             {
-                var messages = await _storage.FetchPendingAsync(_options.BatchSize, stoppingToken);
+                var messages = await _storage.FetchPendingMessagesAsync(_options.BatchSize, stoppingToken);
 
                 if (messages.Count == 0) continue;
 
@@ -40,12 +42,16 @@ public class OutboxBackgroundWorker : BackgroundService
                     try
                     {
                         await _publisher.PublishAsync(message, stoppingToken);
-                        await _storage.MarkAsCompletedAsync(message.Id, stoppingToken);
+                        await _storage.MarkAsProcessedAsync(message.Id, stoppingToken);
                     }
                     catch (Exception ex)
                     {
                         _logger.LogError(ex, "Failed to publish Outbox message {MessageId}", message.Id);
-                        await _storage.MarkAsFailedAsync(message.Id, ex.Message, _options.MaxRetryCount, stoppingToken);
+
+                        // Exponential backoff veya sabit gecikme ile bir sonraki deneme zamanı
+                        var nextRetryUtc = DateTime.UtcNow.AddSeconds(Math.Pow(2, message.RetryCount + 1));
+
+                        await _storage.MarkAsFailedAsync(message.Id, ex.Message, nextRetryUtc, stoppingToken);
                     }
                 }
             }

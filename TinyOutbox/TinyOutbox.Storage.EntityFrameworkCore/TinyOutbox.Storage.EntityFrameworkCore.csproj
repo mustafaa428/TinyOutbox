@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<PackageIconUrl>TinyOutbox.Storage.EntityFrameworkCore.png</PackageIconUrl>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>true</IsPackable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+		<PackageId>TinyOutbox.Storage.EntityFrameworkCore</PackageId>
+		<Version>1.0.2</Version>
+		<Authors>Mustafa</Authors>
+		<Description>Generic EF Core storage provider for TinyOutbox with optimistic locking and automatic retention cleanup. Supports SQL Server, PostgreSQL, MySQL, SQLite, and more.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/mustafaa428/TinyOutbox</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mustafaa428/TinyOutbox</RepositoryUrl>
+		<PackageTags>outbox;efcore;entityframework;transactional-outbox;sqlserver;postgresql;mysql;sqlite;inbox</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="TinyOutbox.Storage.EntityFrameworkCore.png" Pack="true" PackagePath="\" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TinyOutbox.Core\TinyOutbox.Core.csproj" />
+	</ItemGroup>
+
+</Project>

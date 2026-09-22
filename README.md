@@ -6,11 +6,10 @@
 
 [![Build & Test](https://github.com/mustafaa428/TinyOutbox/actions/workflows/ci.yml/badge.svg)](https://github.com/mustafaa428/TinyOutbox/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0%20%7C%2010.0-purple.svg)](https://dotnet.microsoft.com/)
-
+[![.NET](https://img.shields.io/badge/.NET-10.0-purple.svg)](https://dotnet.microsoft.com/)
 Designed for clean architectures and microservices that require bulletproof message delivery without the weight of full service bus frameworks.
 
-[Features](#-key-features) • [Architecture](#-architecture) • [Quick Start](#-quick-start) • [Schema](#-database-schema) • [Tests](#-testing)
+[Features](#-key-features) • [Architecture](#-architecture) • [Quick Start](#-quick-start) • [EF Core Support](#-entity-framework-core-support) • [Retention & Cleanup](#-retention--cleanup-worker) • [Schema](#-database-schema) • [Tests](#-testing)
 
 ---
 
@@ -22,7 +21,7 @@ In distributed architectures, publishing messages to a message broker during dat
 
 **TinyOutbox** solves this cleanly using the **Transactional Outbox Pattern**:
 - **Atomic Operations:** Events are written to the local database in the *exact same transaction* as your domain data.
-- **Lock-Free Concurrency:** Uses PostgreSQL's native `FOR UPDATE SKIP LOCKED` so multiple background worker instances or Kubernetes pods can scale horizontally without race conditions or duplicate deliveries.
+- **Lock-Free / Concurrent Scaling:** Supports PostgreSQL's native `FOR UPDATE SKIP LOCKED` or a database-agnostic Optimistic Concurrency model (`ExecuteUpdateAsync` / `ExecuteDeleteAsync`) so multiple background worker instances or Kubernetes pods can scale horizontally without race conditions or duplicate deliveries.
 - **Consumer Idempotency:** The companion `TinyInbox` prevents double-processing when consumers encounter retries or network replays.
 
 ---
@@ -30,10 +29,11 @@ In distributed architectures, publishing messages to a message broker during dat
 ## ✨ Key Features
 
 - **⚡ Zero Bloat:** No heavy dependencies or opinionated framework lock-in. Minimal memory and CPU allocation.
-- **🔒 Concurrency Safe:** Native horizontal scaling support via `SKIP LOCKED`.
+- **🔒 Concurrency Safe:** Native horizontal scaling support via `SKIP LOCKED` (PostgreSQL) or Optimistic Locking (`LockedBy`, `LockExpiresAtUtc`).
 - **🔁 Resilient Retries:** Built-in exponential backoff for transient broker outages (`2^retry_count`).
 - **🛡️ Idempotent Consumer (Inbox):** Built-in deduplication pattern via `ITinyInbox`.
-- **🚀 Pluggable Architecture:** Storage (PostgreSQL) and Transport (RabbitMQ) layers are decoupled from the core contract.
+- **🚀 Pluggable Architecture:** Storage (PostgreSQL, Entity Framework Core) and Transport (RabbitMQ) layers are decoupled from the core contracts.
+- **🧹 Automated Retention & Cleanup:** Built-in background worker support to automatically purge old processed or failed messages from the storage table.
 - **🛠️ Zero-Config Setup:** Automatically generates optimized tables and indexes on boot if enabled.
 
 ---
@@ -45,9 +45,9 @@ In distributed architectures, publishing messages to a message broker during dat
 │
 ├─ 1. Write domain entities + Enqueue event (Single Database Transaction)
 ▼
-[ PostgreSQL: tiny_outbox_messages ]
+[ Storage Provider: PostgreSQL / Entity Framework Core ]
 │
-├─ 2. Batch poll & lock pending messages (FOR UPDATE SKIP LOCKED)
+├─ 2. Batch poll & lock pending messages
 ▼
 [ TinyOutbox.Hosting: OutboxBackgroundWorker ]
 │
@@ -61,17 +61,11 @@ In distributed architectures, publishing messages to a message broker during dat
 │
 ├─ 5. Check idempotency record (tiny_inbox_messages)
 └─ 6. Execute business logic ONLY IF NOT PROCESSED
-```
-
----
-
-## 🚀 Quick Start
-
-### 1. Installation
-
+🚀 Quick Start (PostgreSQL & RabbitMQ)
+1. Installation
 Install the packages for your project needs via .NET CLI:
 
-```bash
+Bash
 # Core contracts and background worker engine
 dotnet add package TinyOutbox.Core
 dotnet add package TinyOutbox.Hosting
@@ -81,11 +75,8 @@ dotnet add package TinyOutbox.Storage.PostgreSql
 
 # RabbitMQ transport provider
 dotnet add package TinyOutbox.Transport.RabbitMQ
-```
-
-### 2. Dependency Injection Setup (`Program.cs`)
-
-```csharp
+2. Dependency Injection Setup (Program.cs)
+C#
 using TinyOutbox.Core;
 using TinyOutbox.Hosting;
 using TinyOutbox.Storage.PostgreSql;
@@ -117,13 +108,10 @@ builder.Services.AddTinyOutbox(options =>
 
 var app = builder.Build();
 app.Run();
-```
-
-### 3. Producing Events (Transactional Outbox)
-
+3. Producing Events (Transactional Outbox)
 Attach the outbox write to your existing transactional context:
 
-```csharp
+C#
 app.MapPost("/orders", async (CreateOrderRequest request, ITinyOutbox outbox, NpgsqlDataSource dataSource) =>
 {
     await using var connection = await dataSource.OpenConnectionAsync();
@@ -145,13 +133,10 @@ app.MapPost("/orders", async (CreateOrderRequest request, ITinyOutbox outbox, Np
 
     return Results.Accepted($"/orders/{orderId}");
 });
-```
-
-### 4. Consuming Events Idempotently (TinyInbox)
-
+4. Consuming Events Idempotently (TinyInbox)
 Protect consumers against at-least-once message delivery duplicates:
 
-```csharp
+C#
 public class OrderCreatedConsumer
 {
     private readonly ITinyInbox _inbox;
@@ -179,15 +164,81 @@ public class OrderCreatedConsumer
         }
     }
 }
-```
+🧩 Entity Framework Core Support
+If your project utilizes Entity Framework Core instead of raw Dapper/Npgsql, you can use the generic EF Core storage provider. It is database-agnostic and relies on EF Core's high-performance ExecuteUpdateAsync and ExecuteDeleteAsync features combined with an Optimistic Concurrency model (LockedBy, LockExpiresAtUtc) to prevent multi-pod conflicts safely across any relational database (PostgreSQL, SQL Server, MySQL, SQLite, etc.).
 
----
+1. Installation
+Bash
+dotnet add package TinyOutbox.Storage.EntityFrameworkCore
+2. DbContext Configuration
+Apply the tiny outbox mapping inside your DbContext:
 
-## 🗄️ Database Schema
+C#
+using Microsoft.EntityFrameworkCore;
+using TinyOutbox.Core;
+using TinyOutbox.Storage.EntityFrameworkCore;
 
-If `AutoMigrate = false`, apply the migration manually to your database (e.g., via EF Core, Flyway, or DbUp):
+public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-```sql
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        // Maps OutboxMessage entity to your preferred table name
+        modelBuilder.ApplyTinyOutbox("tiny_outbox_messages");
+    }
+}
+3. Dependency Injection Setup (Program.cs)
+C#
+builder.Services.AddTinyOutbox(options =>
+{
+    options.BatchSize = 50;
+    options.PollingInterval = TimeSpan.FromSeconds(2);
+})
+.UseEntityFrameworkCore<AppDbContext>()
+.UseRabbitMQ(opt =>
+{
+    opt.HostName = "localhost";
+    opt.Port = 5672;
+    opt.UserName = "guest";
+    opt.Password = "guest";
+    opt.ExchangeName = "domain.events.exchange";
+    opt.ExchangeType = "topic";
+});
+🧹 Retention & Cleanup Worker
+To prevent outbox tables from growing indefinitely over time, TinyOutbox provides a background cleanup worker via TinyOutbox.Hosting. You can configure retention thresholds to automatically purge processed or failed messages.
+
+Setup in Program.cs:
+C#
+builder.Services.AddTinyOutbox(options =>
+{
+    options.BatchSize = 100;
+    options.PollingInterval = TimeSpan.FromSeconds(10);
+})
+.UsePostgreSql(connectionString)
+.UseRabbitMQ(rabbitOptions)
+.UseCleanup(cleanupOptions =>
+{
+    // Automatically delete successfully completed outbox messages older than 7 days
+    cleanupOptions.ProcessedRetentionPeriod = TimeSpan.FromDays(7);
+    
+    // Automatically delete failed/dead-letter outbox messages older than 30 days
+    cleanupOptions.FailedRetentionPeriod = TimeSpan.FromDays(30);
+    
+    // How often the cleanup worker runs in the background
+    cleanupOptions.CleanupInterval = TimeSpan.FromHours(1);
+    
+    // Batch deletion size per execution cycle to avoid locking the database
+    cleanupOptions.BatchSize = 500;
+});
+🗄️ Database Schema (PostgreSQL Manual Reference)
+If AutoMigrate = false, apply the migration manually to your database (e.g., via EF Core, Flyway, or DbUp):
+
+SQL
 -- Outbox Table
 CREATE TABLE IF NOT EXISTS tiny_outbox_messages (
     id UUID PRIMARY KEY,
@@ -198,7 +249,9 @@ CREATE TABLE IF NOT EXISTS tiny_outbox_messages (
     processed_at_utc TIMESTAMPTZ NULL,
     retry_count INT NOT NULL DEFAULT 0,
     last_error TEXT NULL,
-    status SMALLINT NOT NULL DEFAULT 0 -- 0: Pending, 1: Processing, 2: Completed, 3: Failed
+    status SMALLINT NOT NULL DEFAULT 0, -- 0: Pending, 1: Processing, 2: Completed, 3: Failed
+    locked_by VARCHAR(150) NULL,
+    lock_expires_at_utc TIMESTAMPTZ NULL
 );
 
 -- Fetch Performance Index
@@ -210,35 +263,27 @@ WHERE status = 0;
 CREATE TABLE IF NOT EXISTS tiny_inbox_messages (
     message_id UUID PRIMARY KEY,
     event_type VARCHAR(500) NOT NULL,
-    received_at_utc TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    received_at_utc TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    processed_at_utc TIMESTAMPTZ NULL
 );
-```
+🧪 Testing
+The test suite runs end-to-end integration tests using Testcontainers for .NET to spin up real, ephemeral Docker instances of PostgreSQL and RabbitMQ:
 
----
-
-## 🧪 Testing
-
-The test suite runs end-to-end integration tests using **[Testcontainers for .NET](https://dotnet.testcontainers.org/)** to spin up real, ephemeral Docker instances of PostgreSQL and RabbitMQ:
-
-```bash
+Bash
 # Ensure Docker daemon is running, then execute:
 dotnet test
-```
-
----
-
-## 🤝 Contributing
-
+🤝 Contributing
 Contributions, issues, and feature requests are welcome!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'feat: Add AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Fork the Project   
 
----
+Create your Feature Branch (git checkout -b feature/AmazingFeature)   
 
-## 📄 License
+Commit your Changes (git commit -m 'feat: Add AmazingFeature')   
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Push to the Branch (git push origin feature/AmazingFeature)   
+
+Open a Pull Request   
+
+📄 License
+Distributed under the MIT License. See LICENSE for more information.

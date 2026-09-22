@@ -1,4 +1,6 @@
-﻿namespace TinyOutbox.Core.Services.Abstract;
+﻿using TinyOutbox.Core.Services.Abstract;
+
+namespace TinyOutbox.Core.Services.Concrate;
 
 public class TinyInboxService : ITinyInbox
 {

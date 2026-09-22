@@ -7,6 +7,7 @@
   </Folder>
   <Project Path="TinyOutbox.Core/TinyOutbox.Core.csproj" />
   <Project Path="TinyOutbox.Hosting/TinyOutbox.Hosting.csproj" />
+  <Project Path="TinyOutbox.Storage.EntityFrameworkCore/TinyOutbox.Storage.EntityFrameworkCore.csproj" Id="1ab09e0d-6ead-4201-a32e-6ad1bd78dad0" />
   <Project Path="TinyOutbox.Storage.PostgreSql/TinyOutbox.Storage.PostgreSql.csproj" />
   <Project Path="TinyOutbox.Transport.RabbitMQ/TinyOutbox.Transport.RabbitMQ.csproj" />
 </Solution>

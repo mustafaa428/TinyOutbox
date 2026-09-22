@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using TinyOutbox.Core.Services.Abstract;
 
-namespace TinyOutbox.Core.Services.Abstract;
+namespace TinyOutbox.Core.Services.Concrate;
 
 public class TinyOutboxService : ITinyOutbox
 {

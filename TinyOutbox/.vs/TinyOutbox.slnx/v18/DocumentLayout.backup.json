@@ -3,56 +3,24 @@
   "WorkspaceRootPath": "D:\\Github\\TinyOutbox\\TinyOutbox\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.core\\services\\abstract\\outboxmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|solutionrelative:tinyoutbox.core\\services\\abstract\\outboxmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1AB09E0D-6EAD-4201-A32E-6AD1BD78DAD0}|TinyOutbox.Storage.EntityFrameworkCore\\TinyOutbox.Storage.EntityFrameworkCore.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.storage.entityframeworkcore\\tinyoutbox.storage.entityframeworkcore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1AB09E0D-6EAD-4201-A32E-6AD1BD78DAD0}|TinyOutbox.Storage.EntityFrameworkCore\\TinyOutbox.Storage.EntityFrameworkCore.csproj|solutionrelative:tinyoutbox.storage.entityframeworkcore\\tinyoutbox.storage.entityframeworkcore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.core\\services\\abstract\\iinboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|solutionrelative:tinyoutbox.core\\services\\abstract\\iinboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.storage.postgresql\\tinyoutbox.storage.postgresql.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|solutionrelative:tinyoutbox.storage.postgresql\\tinyoutbox.storage.postgresql.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.core\\services\\abstract\\ioutboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|solutionrelative:tinyoutbox.core\\services\\abstract\\ioutboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F901FFBC-BDCF-CEC5-3747-21CC26164FA9}|TinyOutbox.Transport.RabbitMQ\\TinyOutbox.Transport.RabbitMQ.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.transport.rabbitmq\\tinyoutbox.transport.rabbitmq.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F901FFBC-BDCF-CEC5-3747-21CC26164FA9}|TinyOutbox.Transport.RabbitMQ\\TinyOutbox.Transport.RabbitMQ.csproj|solutionrelative:tinyoutbox.transport.rabbitmq\\tinyoutbox.transport.rabbitmq.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.core\\tinyoutbox.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|solutionrelative:tinyoutbox.core\\tinyoutbox.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{17D8A94D-2A0E-2256-63D6-A1AA7B4AFE22}|Samples\\TinyOutbox.Sample.Api\\TinyOutbox.Sample.Api.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\samples\\tinyoutbox.sample.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{17D8A94D-2A0E-2256-63D6-A1AA7B4AFE22}|Samples\\TinyOutbox.Sample.Api\\TinyOutbox.Sample.Api.csproj|solutionrelative:samples\\tinyoutbox.sample.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{268BA1D0-F757-1EED-7B83-05A461A9B6E2}|TinyOutbox.IntegrationTests\\TinyOutbox.IntegrationTests.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.integrationtests\\outboxintegrationtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{268BA1D0-F757-1EED-7B83-05A461A9B6E2}|TinyOutbox.IntegrationTests\\TinyOutbox.IntegrationTests.csproj|solutionrelative:tinyoutbox.integrationtests\\outboxintegrationtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.storage.postgresql\\postgresqlextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|solutionrelative:tinyoutbox.storage.postgresql\\postgresqlextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.storage.postgresql\\postgresqlinboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|solutionrelative:tinyoutbox.storage.postgresql\\postgresqlinboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{985D2985-25DE-BFE2-CA2A-8A0E96DD8F96}|TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.hosting\\tinyoutboxbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{985D2985-25DE-BFE2-CA2A-8A0E96DD8F96}|TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj|solutionrelative:tinyoutbox.hosting\\tinyoutboxbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{985D2985-25DE-BFE2-CA2A-8A0E96DD8F96}|TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.hosting\\outboxoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{985D2985-25DE-BFE2-CA2A-8A0E96DD8F96}|TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj|solutionrelative:tinyoutbox.hosting\\outboxoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.storage.postgresql\\postgresqloutboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|solutionrelative:tinyoutbox.storage.postgresql\\postgresqloutboxstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.storage.postgresql\\postgresqloutboxoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7410237-3AA6-0A2C-5715-19F99E3788D3}|TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj|solutionrelative:tinyoutbox.storage.postgresql\\postgresqloutboxoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.core\\services\\abstract\\tinyinboxservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03579772-F843-C01C-7CED-AD2E34AF81F1}|TinyOutbox.Core\\TinyOutbox.Core.csproj|solutionrelative:tinyoutbox.core\\services\\abstract\\tinyinboxservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{985D2985-25DE-BFE2-CA2A-8A0E96DD8F96}|TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj|d:\\github\\tinyoutbox\\tinyoutbox\\tinyoutbox.hosting\\tinyoutbox.hosting.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{985D2985-25DE-BFE2-CA2A-8A0E96DD8F96}|TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj|solutionrelative:tinyoutbox.hosting\\tinyoutbox.hosting.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,41 +30,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 189,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OutboxMessage.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\OutboxMessage.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Core\\Services\\Abstract\\OutboxMessage.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\OutboxMessage.cs",
-              "RelativeToolTip": "TinyOutbox.Core\\Services\\Abstract\\OutboxMessage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T20:07:04.379Z",
+              "DocumentIndex": 2,
+              "Title": "TinyOutbox.Transport.RabbitMQ",
+              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Transport.RabbitMQ\\TinyOutbox.Transport.RabbitMQ.csproj",
+              "RelativeDocumentMoniker": "TinyOutbox.Transport.RabbitMQ\\TinyOutbox.Transport.RabbitMQ.csproj",
+              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Transport.RabbitMQ\\TinyOutbox.Transport.RabbitMQ.csproj",
+              "RelativeToolTip": "TinyOutbox.Transport.RabbitMQ\\TinyOutbox.Transport.RabbitMQ.csproj",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-22T20:25:05.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IOutboxStorage.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\IOutboxStorage.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Core\\Services\\Abstract\\IOutboxStorage.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\IOutboxStorage.cs",
-              "RelativeToolTip": "TinyOutbox.Core\\Services\\Abstract\\IOutboxStorage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T20:06:40.043Z",
+              "DocumentIndex": 1,
+              "Title": "TinyOutbox.Storage.PostgreSql",
+              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj",
+              "RelativeDocumentMoniker": "TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj",
+              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj",
+              "RelativeToolTip": "TinyOutbox.Storage.PostgreSql\\TinyOutbox.Storage.PostgreSql.csproj",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-22T20:24:50.627Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TinyOutbox.Storage.EntityFrameworkCore",
+              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.EntityFrameworkCore\\TinyOutbox.Storage.EntityFrameworkCore.csproj",
+              "RelativeDocumentMoniker": "TinyOutbox.Storage.EntityFrameworkCore\\TinyOutbox.Storage.EntityFrameworkCore.csproj",
+              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.EntityFrameworkCore\\TinyOutbox.Storage.EntityFrameworkCore.csproj",
+              "RelativeToolTip": "TinyOutbox.Storage.EntityFrameworkCore\\TinyOutbox.Storage.EntityFrameworkCore.csproj",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-22T20:24:32.433Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TinyOutbox.Hosting",
+              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj",
+              "RelativeDocumentMoniker": "TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj",
+              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj",
+              "RelativeToolTip": "TinyOutbox.Hosting\\TinyOutbox.Hosting.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-22T20:23:52.33Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -106,138 +92,18 @@
               "RelativeDocumentMoniker": "TinyOutbox.Core\\TinyOutbox.Core.csproj",
               "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\TinyOutbox.Core.csproj",
               "RelativeToolTip": "TinyOutbox.Core\\TinyOutbox.Core.csproj",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAswBoAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-09-20T19:47:04.475Z",
+              "WhenOpened": "2026-09-22T20:22:06.603Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PostgreSqlExtensions.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlExtensions.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Storage.PostgreSql\\PostgreSqlExtensions.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlExtensions.cs",
-              "RelativeToolTip": "TinyOutbox.Storage.PostgreSql\\PostgreSqlExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:26:53.832Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PostgreSqlInboxStorage.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlInboxStorage.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Storage.PostgreSql\\PostgreSqlInboxStorage.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlInboxStorage.cs",
-              "RelativeToolTip": "TinyOutbox.Storage.PostgreSql\\PostgreSqlInboxStorage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:25:36.451Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "TinyOutboxBuilder.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Hosting\\TinyOutboxBuilder.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Hosting\\TinyOutboxBuilder.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Hosting\\TinyOutboxBuilder.cs",
-              "RelativeToolTip": "TinyOutbox.Hosting\\TinyOutboxBuilder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:25:04.359Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OutboxOptions.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Hosting\\OutboxOptions.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Hosting\\OutboxOptions.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Hosting\\OutboxOptions.cs",
-              "RelativeToolTip": "TinyOutbox.Hosting\\OutboxOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:25:03.466Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PostgreSqlOutboxStorage.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxStorage.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxStorage.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxStorage.cs",
-              "RelativeToolTip": "TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxStorage.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAUwIEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:22:36.719Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IInboxStorage.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\IInboxStorage.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Core\\Services\\Abstract\\IInboxStorage.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\IInboxStorage.cs",
-              "RelativeToolTip": "TinyOutbox.Core\\Services\\Abstract\\IInboxStorage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:21:27.165Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OutboxIntegrationTests.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.IntegrationTests\\OutboxIntegrationTests.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.IntegrationTests\\OutboxIntegrationTests.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.IntegrationTests\\OutboxIntegrationTests.cs",
-              "RelativeToolTip": "TinyOutbox.IntegrationTests\\OutboxIntegrationTests.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAuwLgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:29:09.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\Samples\\TinyOutbox.Sample.Api\\Program.cs",
-              "RelativeDocumentMoniker": "Samples\\TinyOutbox.Sample.Api\\Program.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\Samples\\TinyOutbox.Sample.Api\\Program.cs",
-              "RelativeToolTip": "Samples\\TinyOutbox.Sample.Api\\Program.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAwwBUAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T18:53:34.268Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PostgreSqlOutboxOptions.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxOptions.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxOptions.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxOptions.cs",
-              "RelativeToolTip": "TinyOutbox.Storage.PostgreSql\\PostgreSqlOutboxOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:22:18.016Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "TinyInboxService.cs",
-              "DocumentMoniker": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\TinyInboxService.cs",
-              "RelativeDocumentMoniker": "TinyOutbox.Core\\Services\\Abstract\\TinyInboxService.cs",
-              "ToolTip": "D:\\Github\\TinyOutbox\\TinyOutbox\\TinyOutbox.Core\\Services\\Abstract\\TinyInboxService.cs",
-              "RelativeToolTip": "TinyOutbox.Core\\Services\\Abstract\\TinyInboxService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-20T19:21:47.045Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }

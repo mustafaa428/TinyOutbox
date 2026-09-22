@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TinyOutbox.Core.Services.Abstract;
+using TinyOutbox.Core.Services.Concrate;
 
 namespace TinyOutbox.Hosting;
 
